@@ -11,4 +11,24 @@ body{
 }                        
 body .card{
     width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #fff url('../img/bg02.png');
+}
+body .card .card-content figure {
+text-align: center;
+}
+.input-field .prefix {
+    color: #474747;
+}
+body .card .card-content form .containerButton {
+    text-align: center;
+}
+body .card .card-content form .containerButton button{
+    width: 50%;
+}
+.btn.waves-effect.waves-light{
+    background: #474747;
 }
