@@ -1,0 +1,101 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+hr{
+    margin: 20px 0;
+}
+body{
+    width: 100vw;
+    overflow-x: hidden;
+}
+body aside{
+    width: 19.9999%;
+    min-height: 100vh;
+    float: left;
+    background: #364050 url('../img/bg02.png');
+}
+body aside nav{
+    margin-top: 20px;
+    background: transparent;
+    height: auto;
+    padding: 0 20px;
+}
+body aside nav .datos{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    column-gap: 10px;
+}
+body aside nav .datos .info h4{
+    font-size: 14px;
+}
+body aside nav .datos figure{
+    margin-top: 20px;
+}
+body aside nav .datos figure img{
+    width: 100%;
+    border-radius: 10px;
+}
+body aside nav ul li{
+    float: initial;
+    
+}
+body aside nav ul li .material-icons.prefix{
+    display: initial;
+    vertical-align: sub;
+}
+body aside nav h5{
+    margin: 0;
+    background: #C9302C url('../img/bg01.png');
+    border-radius: 8px;
+    padding: 15px 5px;
+    text-align: center;
+}
+body aside figure{
+    text-align: center;
+    margin: 0;
+    margin-top: 50px;
+}
+body aside figure h6{
+    color: white;
+    font-weight: bolder;
+}
+body aside figure img{
+    width: 25%;
+}
+body .mainHome{
+    width: 79.9999%;
+    min-height: 100vh;
+    float: right;
+    background: #fff url('../img/bg02.png');
+}
+body .mainHome .container{
+    width: 90%;
+}
+body .mainHome .container .containerOpciones{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    column-gap: 15px;
+}
+body .mainHome .container .containerOpciones a .card{
+    color: #fff;
+    transition: .3s;
+}
+body .mainHome .container .containerOpciones a .card:hover{
+    box-shadow: 5px 5px .5px 1px rgba(0, 0, 0, .5);
+}
+body .mainHome .container .containerOpciones a .card .card-content{
+    padding: 10px;
+}
+body .mainHome .container .containerOpciones a .card .card-content figure img{
+    width: 100%;
+}
+
+body .mainHome .container .containerOpciones a .card .card-action{
+    background: #364050 url('../img/bg02.png');
+}
+body .mainHome .container .containerOpciones a .card .card-action h6{
+    text-align: center;            
+    margin: 0;
+}
