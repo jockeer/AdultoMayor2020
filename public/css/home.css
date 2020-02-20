@@ -1,6 +1,7 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 body{
     width: 100vw;
@@ -8,13 +9,46 @@ body{
 }
 body aside{
     width: 19.9999%;
-    height: 100vh;
+    min-height: 100vh;
     float: left;
-    background: #364050;
+    background: #364050 url('../img/bg02.png');
+}
+body aside nav{
+    margin-top: 20px;
+    background: transparent;
+    height: auto;
+}
+body aside nav ul li{
+    float: initial;
+    
+}
+body aside nav ul li .material-icons.prefix{
+    display: initial;
+    vertical-align: sub;
+}
+body aside nav h5{
+    margin: 0;
+    background: #C9302C url('../img/bg01.png');
+    padding: 15px 5px;
+    text-align: center;
+}
+body aside figure{
+    text-align: center;
+    margin: 0;
+    margin-top: 50px;
+}
+body aside figure h6{
+    color: white;
+    font-weight: bolder;
+}
+body aside figure img{
+    width: 25%;
 }
 body main{
     width: 79.9999%;
+    min-height: 100vh;
     float: right;
+    background: #fff url('../img/bg02.png');
 }
 body main .container{
     width: 90%;
@@ -24,16 +58,24 @@ body main .container .containerOpciones{
     grid-template-columns: repeat(4,1fr);
     column-gap: 15px;
 }
-body main .container .containerOpciones .card{
+body main .container .containerOpciones a .card{
+    color: #fff;
     transition: .3s;
 }
-body main .container .containerOpciones .card:hover{
+body main .container .containerOpciones a .card:hover{
     box-shadow: 5px 5px .5px 1px rgba(0, 0, 0, .5);
 }
-body main .container .containerOpciones .card .card-content{
-   padding: 10px;
+body main .container .containerOpciones a .card .card-content{
+    padding: 10px;
 }
-body main .container .containerOpciones .card .card-content figure img{
+body main .container .containerOpciones a .card .card-content figure img{
     width: 100%;
 }
-            
+
+body main .container .containerOpciones a .card .card-action{
+    background: #364050 url('../img/bg02.png');
+}
+body main .container .containerOpciones a .card .card-action h6{
+    text-align: center;            
+    margin: 0;
+}
