@@ -9,7 +9,7 @@ const upload = multer()
 //-------------ROUTES-------------------
 router.get('/', function (req, res, next) {
     if (req.isAuthenticated()) {
-        res.redirect('/home');
+        res.redirect('/home/0');
     } else {
         res.render('index', {
             title: "Login",
@@ -77,17 +77,39 @@ router.post('/login', passport.authenticate('local', {
     res.redirect('/');
 });
 //----------------------------------------------
-router.get('/home', async function (req, res, next) {
-    if (req.isAuthenticated()) {
-        res.render('home', {
-            title: "Home",
-            menu: 2,
-            user: req.user,
-            file: `photos/${req.user.email}.jpg`
-        });
-        console.log(req.user)
-    } else {
-        res.redirect('/login');
+router.get('/home/:menu', async function (req, res, next) {
+    var menu = req.params.menu
+    switch (menu) {
+        case '0':
+            render(menu)
+            break;
+        case '1':
+            render(menu)
+            break;
+        case '2':
+            render(menu)
+            break;
+        case '3':
+            render(menu)
+            break;
+        case '4':
+            render(menu)
+            break;
+        default:
+    }
+
+    function render(num) {
+        if (req.isAuthenticated()) {
+            res.render('home', {
+                title: "Home",
+                menu: num,
+                user: req.user,
+                file: `photos/${req.user.email}.jpg`
+            });
+            console.log(req.user)
+        } else {
+            res.redirect('/login');
+        }
     }
 });
 //----------------------------------------------

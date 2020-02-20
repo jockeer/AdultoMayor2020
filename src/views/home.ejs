@@ -37,9 +37,9 @@
 
         <div class="container">
             <div class="containerOpciones">
-                <a href="agregarPersona.html">
+                <a onclick="location.href = '/home/1'">
 
-                    <div class="card grey lighten-5">
+                    <div class=" card grey lighten-5">
                         <div class="card-content white-text">
                             <figure>
                                 <img src="../public/img/Agregar.png" alt="">
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a onclick="location.href = '/home/2'">
 
                     <div class="card grey lighten-5">
                         <div class="card-content white-text">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a onclick="location.href = '/home/3'">
 
                     <div class="card grey lighten-5">
 
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a onclick="location.href = '/home/4'">
                     <div class="card grey lighten-5">
                         <div class="card-content white-text">
                             <figure>
@@ -95,9 +95,14 @@
             </div>
             <% if (menu == 1) { %>
             <% include agregarPersona.ejs %>
-            <%} else { %>
-
+            <%} if(menu == 2) { %>
+            <p> 2!</p>
+            <%} if(menu == 3) { %>
+            <p> 3!!!</p>
+            <%} if(menu == 4) { %>
+            <p> 4!!!</p>
             <% } %>
+
         </div>
     </main>
 

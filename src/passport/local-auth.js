@@ -3,7 +3,7 @@ const LocalStrategy = require('passport-local').Strategy
 
 const pool = require('../database')
 
-
+//
 passport.serializeUser(function (user, done) {
     done(null, user);
 });

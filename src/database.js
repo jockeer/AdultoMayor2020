@@ -18,7 +18,7 @@ const Cnx = async () => {
         console.log('Error en la conexion con la base de datos')
     }
 }
-
+//
 Cnx()
 
 module.exports = pool
