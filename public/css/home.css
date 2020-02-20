@@ -22,6 +22,21 @@ body aside nav{
     height: auto;
     padding: 0 20px;
 }
+body aside nav .datos{
+    display: grid;
+    grid-template-columns: 30% 70%;
+    column-gap: 10px;
+}
+body aside nav .datos .info h4{
+    font-size: 14px;
+}
+body aside nav .datos figure{
+    margin-top: 20px;
+}
+body aside nav .datos figure img{
+    width: 100%;
+    border-radius: 10px;
+}
 body aside nav ul li{
     float: initial;
     
@@ -49,38 +64,38 @@ body aside figure h6{
 body aside figure img{
     width: 25%;
 }
-body main{
+body .mainHome{
     width: 79.9999%;
     min-height: 100vh;
     float: right;
     background: #fff url('../img/bg02.png');
 }
-body main .container{
+body .mainHome .container{
     width: 90%;
 }
-body main .container .containerOpciones{
+body .mainHome .container .containerOpciones{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     column-gap: 15px;
 }
-body main .container .containerOpciones a .card{
+body .mainHome .container .containerOpciones a .card{
     color: #fff;
     transition: .3s;
 }
-body main .container .containerOpciones a .card:hover{
+body .mainHome .container .containerOpciones a .card:hover{
     box-shadow: 5px 5px .5px 1px rgba(0, 0, 0, .5);
 }
-body main .container .containerOpciones a .card .card-content{
+body .mainHome .container .containerOpciones a .card .card-content{
     padding: 10px;
 }
-body main .container .containerOpciones a .card .card-content figure img{
+body .mainHome .container .containerOpciones a .card .card-content figure img{
     width: 100%;
 }
 
-body main .container .containerOpciones a .card .card-action{
+body .mainHome .container .containerOpciones a .card .card-action{
     background: #364050 url('../img/bg02.png');
 }
-body main .container .containerOpciones a .card .card-action h6{
+body .mainHome .container .containerOpciones a .card .card-action h6{
     text-align: center;            
     margin: 0;
 }
