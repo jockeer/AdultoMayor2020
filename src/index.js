@@ -31,6 +31,12 @@ app.use(session({
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+
+app.use((req, res, next) => {
+    app.locals.agregarPersona = req.flash('agregarPersona')
+    app.locals.loginMessage = req.flash('loginMessage')
+    next()
+})
 //---------------------------------------------------------
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -39,7 +45,7 @@ app.use(function (req, res, next) {
     next();
 });
 //---------------------------------------------------------
-//
+
 // routes
 app.use('/', require('./routes/routes'))
 app.use('/public', express.static(__dirname + '/public'))

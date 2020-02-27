@@ -17,10 +17,15 @@
             <h5>Adulto Mayor</h5>
             <div class="datos">
                 <figure>
-                    <img src="../public/img/dan.jpg" alt="">
+                    <img src=" <%= typeof file != 'undefined' ? file : '' %>" class="responsive-file">
                 </figure>
                 <div class="info">
-                    <h4>Nombre Apellido</h4>
+                    <h4><%= `${user.nombres} ${user.apat} ${user.amat}` %></h4>
+                    <h4><%= `Registro: ${user.registro}` %></h4>
+                    <h4><%= `CI: ${user.ci}` %></h4>
+                    <h4><%= `Email: ${user.email}` %></h4>
+                    <h4><%= `Cel: ${user.telf}` %></h4>
+                    <h4><%= `Voluntario: ${user.nombre}` %></h4>
                 </div>
             </div>
             <hr>

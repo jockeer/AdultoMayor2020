@@ -19,7 +19,6 @@
         <img src="../public/img/logilo.png" alt="">
       </figure>
 
-
       <form action="/login" method="POST">
 
         <div class="input-field ">
@@ -32,6 +31,9 @@
           <input id="icon_telephone" type="password" class="validate" name="password">
           <label for="icon_telephone">Contraseña</label>
         </div>
+        <%if (loginMessage) { %>
+        <div><%= loginMessage%></div>
+        <% }%>
         <div class="containerButton">
           <button class="btn waves-effect waves-light" type="submit" name="action">Ingresar</button>
           <label>
@@ -41,17 +43,8 @@
         </div>
 
       </form>
-
-
     </div>
-
   </div>
-
-
-
-
-
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 

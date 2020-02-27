@@ -15,80 +15,84 @@
   <main class="mainAgregar">
     <div class="container">
       <h2>Agregar Informacion</h2>
+      <%if (agregarPersona) { %>
+      <div><%= agregarPersona%></div>
+      <% }%>
       <div class="row">
-        <form class="col s12">
+        <form class="col s12" action="/agregar" method="POST" enctype="multipart/form-data">
           <div class="row">
             <div class="input-field col s6">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_prefix" type="text" class="validate">
+              <input id="icon_prefix" type="text" class="validate" name="nombre">
               <label for="icon_prefix">Nombre</label>
             </div>
             <div class="input-field col s6">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_apPaterno" type="text" class="validate">
+              <input id="icon_apPaterno" type="text" class="validate" name="apat">
               <label for="icon_apPaterno">Apellido Paterno</label>
             </div>
             <div class="input-field col s6">
               <i class="material-icons prefix">account_circle</i>
-              <input id="icon_apMaterno" type="text" class="validate">
+              <input id="icon_apMaterno" type="text" class="validate" name="amat">
               <label for="icon_apMaterno">Apellido Materno</label>
             </div>
             <div class="input-field col s6">
               <i class="material-icons prefix">contact_mail</i>
-              <input id="icon_email" type="email" class="validate">
+              <input id="icon_email" type="email" class="validate" name="email">
               <label for="icon_email">Email</label>
             </div>
             <div class="input-field col s6">
               <i class="material-icons prefix">phone</i>
-              <input id="icon_telephone" type="number" class="validate">
+              <input id="icon_telephone" type="number" class="validate" name="telf">
               <label for="icon_telephone">Telephone</label>
             </div>
             <div class="input-field col s6">
               <i class="material-icons prefix">featured_video</i>
-              <input id="icon_carnet" type="text" class="validate">
+              <input id="icon_carnet" type="text" class="validate" name="ci">
               <label for="icon_carnet">carnet de indentidad</label>
             </div>
+
             <div class="input-field col s6" style="margin-top: 35px;">
               <i class="material-icons prefix">assignment_ind</i>
-              <select class="validate">
-                <option value="" disabled selected>Escoge el rol</option>
-                <option value="Facilitador">Facilitador</option>
-                <option value="Co-Facilitador">Co-Facilitador</option>
-                <option value="Voluntario">Voluntario</option>
-                <option value="Adulto">Adulto</option>
-              </select>
-              <label>Rol</label>
-            </div>
-            <div class="input-field col s6" style="margin-top: 35px;">
-              <i class="material-icons prefix">assignment_ind</i>
-              <select id="tipoPersona" class="validate">
+              <select id="tipoPersona" class="validate" name="tipo">
                 <option value="" disabled selected>Escoge el tipo de persona</option>
                 <option value="Adulto">Adulto</option>
                 <option value="Voluntario">Voluntario</option>
               </select>
               <label>Tipo Persona</label>
             </div>
+            <div id="rolForm" class="input-field col s6" style="margin-top: 35px;">
+              <i class="material-icons prefix">assignment_ind</i>
+              <select class="validate" name="rol">
+                <option value="" disabled selected>Escoge el rol</option>
+                <option value="Facilitador">Facilitador</option>
+                <option value="Co-Facilitador">Co-Facilitador</option>
+                <!-- <option value="Voluntario">Voluntario</option>
+                <option value="Adulto">Adulto</option> -->
+              </select>
+              <label>Rol</label>
+            </div>
             <div id="containerRegistro" class="input-field col s6" style="margin-top: 35px;display: none;">
 
               <i class="material-icons prefix">featured_video</i>
-              <input id="icon_registro" type="text" class="validate">
+              <input id="icon_registro" type="text" class="validate" name="registro">
               <label for="icon_registro">codigo de registro</label>
             </div>
             <div id="containerVoluntario" class="input-field col s6" style="margin-top: 35px; display: none;">
               <i class="material-icons prefix">assignment_ind</i>
-              <select id="" class="validate">
+              <select id="" class="validate" name="voluntario">
                 <option value="" disabled selected>Voluntario</option>
-                <option value="1">Administrativo</option>
-                <option value="2">Aux. Administrativo</option>
-                <option value="3">Aux. Beca</option>
-                <option value="4">Beca</option>
+                <!-- <option value="1">Administrativo</option> -->
+                <option value="1">Aux. Administrativo</option>
+                <option value="2">Aux. Beca</option>
+                <option value="3">Beca</option>
               </select>
               <label>Voluntario</label>
             </div>
             <div class="file-field input-field col s6">
               <div class="btn">
                 <span>Foto</span>
-                <input type="file" id="filePersona">
+                <input type="file" id="filePersona" name="photo">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -102,7 +106,7 @@
             </div>
           </div>
 
-          <button class="btn waves-effect waves-light" type="submit" name="action">Registrar</button>
+          <button class="btn waves-effect waves-light" type="submit">Registrar</button>
         </form>
       </div>
     </div>

@@ -24,7 +24,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         const user = req.body
         // console.log(user.email)
-        cb(null, user.usuario + '.jpg')
+        cb(null, `${user.nombre} ${user.apat} ${user.amat}-${user.ci}.jpg`)
     }
 })
 
@@ -36,7 +36,7 @@ const uploadPhoto = multer({
     fileFilter: function (req, file, cb) {
         checkFileType(file, cb)
     }
-}).single('myPhoto')
+}).single('photo')
 
 function checkFileType(file, cb) {
     //extenciones permitidas
@@ -98,31 +98,91 @@ router.get('/home/:menu', async function (req, res, next) {
         default:
     }
 
-    function render(num) {
+    async function render(num) {
         if (req.isAuthenticated()) {
+            const bd = await pool.query(`select * from personas,voluntarios,tipovoluntario 
+            where personas.idpersona = voluntarios.idpersona and tipovoluntario.idtipo = voluntarios.idtipo and personas.idpersona = $1`, [req.user.idpersona])
+            const datos = bd.rows[0]
             res.render('home', {
                 title: "Home",
                 menu: num,
-                user: req.user,
-                file: `photos/${req.user.email}.jpg`
+                user: datos,
+                file: `../photos/${datos.nombres} ${datos.apat} ${datos.amat}-${datos.ci}.jpg`
             });
-            console.log(req.user)
+            // console.log('home', req.user, datos)
         } else {
             res.redirect('/login');
         }
     }
 });
 //----------------------------------------------
-router.get('/agregar', async function (req, res, next) {
-    if (req.isAuthenticated()) {
-        res.render('agregarPersona', {
-            title: "Agregar Personas",
-            user: req.user,
-            file: `photos/${req.user.email}.jpg`
-        });
-        console.log(req.user)
-    } else {
-        res.redirect('/login');
+async function insertarPersonas(nombres, apat, amat, email, telf, ci) {
+    // await JSON.stringify(pool.query(`insert into personas (nombres,apat,amat,email,telf,ci,estado)
+    //                         values('${nombres}','${apat}','${amat}','${email},'${telf}','${ci}','T'`))
+    await JSON.stringify(pool.query(`insert into personas(nombres,apat,amat,email,telf,ci,estado)
+    values('test','test','test','test','test','test','T')`))
+
+}
+
+
+router.post('/agregar', async function (req, res, next) {
+
+    try {
+        if (req.file == undefined || req.body.nombre == '' || req.body.apat == '' || req.body.amat == '' || req.body.email == '' || req.body.telf == '' || req.body.ci == '' || req.body.tipo == undefined) {
+            console.log('1:', req.body, req.body.tipo)
+            console.log('2:', req.file)
+            req.flash('agregarPersona', 'Error: Todos los campos son necesarios.')
+            res.redirect('/home/1');
+        } else {
+            req.flash('agregarPersona', 'Success.')
+            res.redirect('/home/1');
+        }
+        // uploadPhoto(req, res, async (err) => {
+        //     if (err) {
+        //         // res.render('home', req.flash('agregarPersona', 'Error con la imagen'))
+        //         req.flash('agregarPersona', 'Hubo un problema con el registro.')
+        //         res.redirect('/home/1');
+        //     }
+        //     if (req.file == undefined || req.body.nombre == '' || req.body.apat == '' || req.body.amat == '' || req.body.email == '' || req.body.telf == '' || req.body.ci == '' || req.body.tipo == undefined) {
+        //         console.log('1:', req.body, req.body.tipo)
+        //         console.log('2:', req.file)
+        //         req.flash('agregarPersona', 'Error: Todos los campos son necesarios.')
+        //         res.redirect('/home/1');
+        //     } else {
+        //         const client = await pool.connect()
+        //         await client.query('BEGIN')
+        //         await JSON.stringify(client.query('SELECT * FROM personas WHERE ci=$1', [req.body.ci], function (err, result) {
+        //             if (err) {
+        //                 console.log(err);
+        //             }
+        //             if (result.rows[0]) {
+        //                 req.flash('agregarPersona', 'Este usuario ya existe!')
+        //                 res.redirect('/home/1');
+        //             } else {
+        //                 if (req.body.tipo == 'Voluntario') {
+        //                     //nombres, apat, amat, email, telf, ci
+        //                     console.log('asdasd', req.body);
+
+        //                     insertarPersonas(req.body.nombre, req.body.apat, req.body.amat, req.body.email, req.body.telf, req.body.ci)
+        //                     req.flash('agregarPersona', 'Voluntario.')
+        //                     res.redirect('/home/1');
+
+        //                     // await JSON.stringify(client.query(`insert into voluntarios (registro,idtipo,idpersona)
+        //                     // values(${req.body.registro},${req.body.voluntario},${req.body.amat},${req.body.email},${req.body.telf},${req.body.ci},'T'`))
+        //                 }
+        //                 if (req.body.tipo == 'Adulto') {
+        //                     req.flash('agregarPersona', 'Adulto.')
+        //                     res.redirect('/home/1');
+        //                 }
+
+        //             }
+        //         }));
+        //         client.release();
+
+        //     }
+        // })
+    } catch (error) {
+        throw (error)
     }
 });
 
