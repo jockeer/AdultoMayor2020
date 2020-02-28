@@ -10,6 +10,17 @@ const pool = new Pool({
     connectionString: connectionString,
 })
 
+// async function testBuscarPersona(ci) {
+//     await JSON.stringify(pool.query('SELECT * FROM personas WHERE ci=$1', [ci], function (err, result) {
+//         if (result.rows[0]) {
+//             const row = result.rows[0]
+//             return row
+//         } else {
+//             return err
+//         }
+//     }));
+// }
+
 const Cnx = async () => {
     try {
         const bd = await pool.query('select current_database()')
@@ -18,7 +29,12 @@ const Cnx = async () => {
         console.log('Error en la conexion con la base de datos')
     }
 }
+
+
 //
+
+// testBuscarPersona('9818626')
+
 Cnx()
 
 module.exports = pool
