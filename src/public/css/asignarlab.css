@@ -38,8 +38,7 @@
 .mainAsignar .container .dataTables_wrapper.no-footer .dataTables_length select{
     display: block;
 }
-.mainAsignar .container .containerPersonas{
-}
+
 .mainAsignar .container .containerPersonas .personas{
     display: grid;
     grid-template-columns: 10% 25% 22.5% 22.5% 20% ;
