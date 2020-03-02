@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../public/img/logouteC.png"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link rel="stylesheet" href="../public/materialize/css/materialize.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
+    <link rel="stylesheet" href="../public/css/asignarlab.css">
+    <title>Adulto Mayor | AsignarLab</title>
+</head>
+<body>   
+    <main class="mainAsignar">
+        <div class="container">
+            <h2>Asignacion de Laboratorios</h2>
+            <hr>
+            <div class="containerSelect">
+                <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <select id="selectRol">
+                      <option value="" disabled selected>rol</option>
+                      <option value="Facilitador">Facilitador</option>
+                      <option value="Co-Facilitador">Co-Facilitador</option>
+                      <option value="Voluntario">Voluntario</option>
+                      <option value="Adulto">Adulto</option>
+                    </select>
+                    <label>Seleccione el Rol</label>
+                </div>
+                
+            </div>
+            <a id="btnBuscar" class="btn"><i class="material-icons left">youtube_searched_for</i>Buscar</a>
+
+            <div class="containerFechas">
+
+                <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <input id="fechainicio" type="text" class="datepicker">
+                    <label for="fechainicio">Fecha de Inicio</label>
+                </div>  
+                <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <input id="fechafin" type="text" class="datepicker">
+                    <label for="fechafin">Fecha Fin</label>
+                </div>
+            </div>
+             <hr>
+             <div class="containerPersonas" id="containerPersonas">
+                <!-- <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-red">
+                        <div class="circle-clipper left">
+                        <div class="circle"></div>
+                        </div><div class="gap-patch">
+                        <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                        <div class="circle"></div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>   
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+    <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+    <script src="../public/materialize/js/materialize.min.js"></script>
+    <script src="../public/js/llenarPersonasNoAsignadas.js"></script>
+</body>
+</html>
