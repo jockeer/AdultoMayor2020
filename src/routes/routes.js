@@ -107,12 +107,13 @@ router.get('/home/:menu', async function (req, res, next) {
 
     async function render(num) {
         if (req.isAuthenticated()) {
-            const bd = await pool.query(`select * from personas,voluntarios,tipovoluntario 
+            const bd = await pool.query(`select * from personas,voluntarios,tipovoluntario
             where personas.idpersona = voluntarios.idpersona and tipovoluntario.idtipo = voluntarios.idtipo and personas.idpersona = $1`, [req.user.idpersona])
             const datos = bd.rows[0]
             res.render('home', {
                 title: "Home",
                 menu: num,
+                rol: req.user.rol,
                 user: datos,
                 file: `../photos/${datos.nombres} ${datos.apat} ${datos.amat}-${datos.ci}.jpg`
             });
