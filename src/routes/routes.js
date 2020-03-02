@@ -196,7 +196,6 @@ router.post('/agregar', async function (req, res, next) {
                             req.flash('agregarPersona', 'Este usuario ya existe!')
                             res.redirect('/home/1');
                         } else {
-
                             await pool.query('insert into personas (nombres,apat,amat,email,telf,ci,estado) values($1,$2,$3,$4,$5,$6,$7) RETURNING *',
                                 [body.nombre, body.apat, body.amat, body.email, body.telf, body.ci, 'T'], async (err, resP) => {
                                     if (resP.rows[0]) {
@@ -212,88 +211,6 @@ router.post('/agregar', async function (req, res, next) {
             }
         }
     })
-    // try {
-    //     const body = req.body
-    //     const file = req.file
-    //     console.log(body)
-    //     if (body.nombre == '' || body.apat == '' || body.amat == '' || body.email == '' || body.telf == '' || body.ci == '' || body.tipo == undefined) {
-    //         console.log('1:', body)
-    //         console.log('2:', file)
-    //         req.flash('agregarPersona', 'Error: Todos los campos son necesarios.')
-    //         res.redirect('/home/1');
-    //     } else {
-    //         if (body.tipo == 'Voluntario') {
-    //             uploadPhoto(req, res, async (err) => {
-    //                 console.log('3:', body.tipo)
-    //                 console.log('4:', file)
-    //                 if (err) {
-    //                     req.flash('agregarPersona', 'Voluntario: Hubo un problema con el registro.')
-    //                     res.redirect('/home/1');
-    //                 } else {
-    //                     if (body.registro == '' || body.rol == undefined || body.voluntario == undefined || file == undefined) {
-    //                         req.flash('agregarPersona', 'Error: Todos los campos son necesarios.')
-    //                         res.redirect('/home/1');
-    //                     } else {
-    //                         await JSON.stringify(pool.query('SELECT * FROM personas WHERE ci=$1', [body.ci], function (err, result) {
-    //                             if (result.rows[0]) {
-    //                                 req.flash('agregarPersona', 'Este usuario ya existe!')
-    //                                 res.redirect('/home/1');
-    //                             } else {
-    //                                 req.flash('agregarPersona', 'Success')
-    //                                 res.redirect('/home/1');
-    //                             }
-    //                         }));
-    //                     }
-    //                 }
-    //             })
-    //         }
-    //         // if (req.body.tipo == 'Adulto') {
-    //         //     uploadPhoto(req, res, async (err) => {
-    //         //         if (err) {
-    //         //             req.flash('agregarPersona', 'Adulto: Hubo un problema con el registro.')
-    //         //             res.redirect('/home/1');
-    //         //         } else {
-
-    //         //         }
-    //         //     })
-    //         // }
-    //     }
-    //     // uploadPhoto(req, res, async (err) => {
-    //     //     if (err) {
-    //     //         // res.render('home', req.flash('agregarPersona', 'Error con la imagen'))
-    //     //         req.flash('agregarPersona', 'Hubo un problema con el registro.')
-    //     //         res.redirect('/home/1');
-    //     //     }
-    //     //     if (req.file == undefined || req.body.nombre == '' || req.body.apat == '' || req.body.amat == '' || req.body.email == '' || req.body.telf == '' || req.body.ci == '' || req.body.tipo == undefined) {
-    //     //         console.log('1:', req.body, req.body.tipo)
-    //     //         console.log('2:', req.file)
-    //     //         req.flash('agregarPersona', 'Error: Todos los campos son necesarios.')
-    //     //         res.redirect('/home/1');
-    //     //     } else {
-    //     //         const client = await pool.connect()
-    //     //         await client.query('BEGIN')
-
-
-    //     //         if (req.body.tipo == 'Voluntario') {
-    //     //             //nombres, apat, amat, email, telf, ci
-    //     //             console.log('asdasd', req.body);
-
-    //     //             insertarPersonas(req.body.nombre, req.body.apat, req.body.amat, req.body.email, req.body.telf, req.body.ci)
-    //     //             req.flash('agregarPersona', 'Voluntario.')
-    //     //             res.redirect('/home/1');
-
-    //     //             // await JSON.stringify(client.query(`insert into voluntarios (registro,idtipo,idpersona)
-    //     //             // values(${req.body.registro},${req.body.voluntario},${req.body.amat},${req.body.email},${req.body.telf},${req.body.ci},'T'`))
-    //     //         }
-    //     //         if (req.body.tipo == 'Adulto') {
-    //     //             req.flash('agregarPersona', 'Adulto.')
-    //     //             res.redirect('/home/1');
-    //     //         }
-    //     //     }
-    //     // })
-    // } catch (error) {
-    //     throw (error)
-    // }
 });
 
 //----------------------------------------------
@@ -305,5 +222,21 @@ router.get('/logout', function (req, res) {
     res.redirect('/');
 });
 //----------------------------------------------
+//-----------------API--------------------------
+router.get('/api/getPersonas', async (req, res, next) => {
+    let all = await pool.query('Select * from personas')
+    json = all.rows
+    // console.log(json)
+    res.json(all.rows)
+})
+
+router.get('/api/getPersonas/:id', async (req, res, next) => {
+    var id = req.params.id
+    let all = await pool.query(`Select * from personas where idpersona=${id}`)
+    // console.log(json)
+    res.json(all.rows)
+})
+
+
 
 module.exports = router
