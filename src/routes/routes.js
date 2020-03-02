@@ -230,11 +230,20 @@ router.get('/api/getPersonas', async (req, res, next) => {
     res.json(all.rows)
 })
 
-router.get('/api/getPersonas/:id', async (req, res, next) => {
-    var id = req.params.id
-    let all = await pool.query(`Select * from personas where idpersona=${id}`)
+router.get('/api/getPersonasNoAsignadas/:rol', async (req, res, next) => {
+    var rol = req.params.rol
+    let all = await pool.query(`select pe.idpersona,pe.nombres,pe.apat,pe.amat,pe.ci,cu.rol from personas pe inner join cuentas cu on(pe.idpersona=cu.idpersona) where cu.rol='${rol}' and pe.idpersona not in(select idpersona from asignacion)`)
     // console.log(json)
     res.json(all.rows)
+})
+router.post('/api/asignarLab', async (req, res, next) => {
+    // var id = req.params.id
+    var body = req.body
+    console.log(body)
+    let all = await pool.query(`insert into asignacion(fec_ini,fec_fin,idlab,idpersona,idhorario)values('${body.fec_ini}','${body.fec_fin}',${body.idlab},${body.idpersona},${body.idhorario})`)
+    // console.log(json)
+    res.json(all.rows)
+    // res.redirect('/home/3')
 })
 
 

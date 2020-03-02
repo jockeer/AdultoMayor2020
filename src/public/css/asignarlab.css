@@ -1,0 +1,76 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.mainAsignar{
+    background:#fff url('../img/bg02.png');
+    /* width: 100vw; */
+    min-height: 100vh;
+    padding:20px 0;
+    overflow-x: hidden;
+}
+.mainAsignar .container h2{
+    margin: 0;
+}
+.mainAsignar .container .containerSelect{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.mainAsignar .container .containerSelect .input-field{
+    width: 80%;
+}
+.mainAsignar .container .containerFechas{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 20px;
+    
+}
+.mainAsignar .container .row form .input-field figure{
+    text-align: center;
+}
+.mainAsignar .container .row form .input-field figure img{
+    width: 40%;
+    border-radius: 50%;
+}
+.mainAsignar .container .dataTables_wrapper.no-footer .dataTables_length select{
+    display: block;
+}
+.mainAsignar .container .containerPersonas{
+}
+.mainAsignar .container .containerPersonas .personas{
+    display: grid;
+    grid-template-columns: 10% 25% 22.5% 22.5% 20% ;
+    column-gap: 5px;
+    
+}
+.mainAsignar .container .containerPersonas .personas .NombresPersonas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainAsignar .container .containerPersonas .personas .NombresPersonas h6{
+    text-align: center;
+    font-size: 14px;
+}
+.mainAsignar .container .containerPersonas .personas .NombresPersonas .input-field{
+    width: 100%;
+}
+.mainAsignar .container .containerPersonas .personas .fotoPersonas figure{
+    margin: 0;
+}
+.mainAsignar .container .containerPersonas .personas .fotoPersonas figure img{
+    width: 100%;
+}
+.mainAsignar .container .containerPersonas .personas select{
+    display: block;
+}
+
+h3{
+    margin-top: 50px;
+}
+
+                
+                    
