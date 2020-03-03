@@ -59,11 +59,12 @@
     <% if (menu == 1) { %>
     <% include agregarPersona.ejs %>
     <%} if(menu == 2) { %>
-    <p> 2!</p>
+    <% include actualizar.ejs %>
     <%} if(menu == 3) { %>
-    <p> 3!!!</p>
+    <% include asignarLab.ejs %>
     <%} if(menu == 4) { %>
-    <p> 4!!!</p>
-    <% } %>
-
+    <% include asignarVoluntario.ejs %>
+    <% } if(menu == 5) {%>
+        <% include asistencia.ejs %>
+        <%}%>
 </div>

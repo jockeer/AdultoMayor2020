@@ -24,7 +24,7 @@ function asigarlab(id){
             }
         }).then(res => res.json())
         .catch(error => console.error('Error:', error))
-        .then(response => alert('asignado'));
+        .then(response => location.reload());
 };
 
 
@@ -37,50 +37,31 @@ async function cargarPersonasNoAsignadas(rol){
     const $listaPersonas= await getPersonasNoAsignadas(`http://localhost:3000/api/getPersonasNoAsignadas/${rol}`);
     // debugger
     function PersonasItemTemplate(persona){
-        return `<div class="personas">
-                    <div class="fotoPersonas">
-                        <figure>
-                            <img src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt="">
-                        </figure>
-                    </div>      
-                    <div class="NombresPersonas">
-                        <h6>${persona.nombres} ${persona.apat} ${persona.amat}</h6>
-                    </div>
-                    <div class="NombresPersonas">
-                    <div class="input-field">           
-                        <select id="laboratorio${persona.idpersona}">
-                            <option value="" disabled selected>Laboratorio</option>
-                            <option value="1">N-221</option>
-                            <option value="2">N-401</option>
-                            <option value="3">N-402</option>
+        return `<td class="sorting_1"><img src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt=""></td>
+                <td>${persona.nombres} ${persona.apat} ${persona.amat}</td>
+                <td>
+                <select id="laboratorio${persona.idpersona}">
+                             <option value="" disabled selected>Laboratorio</option>
+                             <option value="1">N-221</option>
+                             <option value="2">N-401</option>
+                             <option value="3">N-402</option>
                             <option value="4">N-503</option>
-                        </select>
-                    </div>
-                    </div>
-            
-
-                    <div class="NombresPersonas">
-                    <div class="input-field">
-                        <select id="horarios${persona.idpersona}">
-                            <option value="" disabled selected>Horario</option>
-                            <option value="1">09:00 - 11:30</option>
-                            <option value="2">14:30 - 17:00</option>
-                        </select>
-                    </div>
-                    </div>
-            
-                    <div class="NombresPersonas">
-                    <div class="input-field">
-                        <a onclick="asigarlab(${persona.idpersona});" class="btn">button</a>
-                    </div>
-                    </div>
-
-                </div>`;
+                         </select></td>
+                <td>
+                <select id="horarios${persona.idpersona}">
+                             <option value="" disabled selected>Horario</option>
+                             <option value="1">09:00 - 11:30</option>
+                             <option value="2">14:30 - 17:00</option>
+                         </select>
+                         </td>
+                <td><a onclick="asigarlab(${persona.idpersona});" class="btn">button</a></td>
+                `
     }
     function createTemplate(HTMLString){
         const $html = document.implementation.createHTMLDocument();
-        $html.body.innerHTML = HTMLString;
-        return $html.body.children[0];
+        const $element = $html.createElement('tr')
+        $element.innerHTML=HTMLString
+        return $element;
     }
     
     function renderPersonas(listpersonas, $container){

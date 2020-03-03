@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
     <link rel="stylesheet" href="../public/materialize/css/materialize.min.css">
-    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="../public/css/asignarlab.css">
     <title>Adulto Mayor | AsignarLab</title>
 </head>
@@ -46,25 +46,43 @@
                 </div>
             </div>
              <hr>
+
+             <table id="example" class="display nowrap dataTable dtr-inline collapsed dataTables_info" role="grid" aria-describedby>
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Laboratorios</th>
+                        <th>Horarios</th>
+                        <th>Acciones</th>
+                        <!-- <th data-class-name="priority">Column 4</th> -->
+                    </tr>
+                </thead>
+                <tbody class="containerPersonas" id="containerPersonas">
+                                     
+                </tbody>
+            </table>
+
+
              <div class="containerPersonas" id="containerPersonas">
-                <!-- <div class="preloader-wrapper big active">
-                    <div class="spinner-layer spinner-red">
-                        <div class="circle-clipper left">
-                        <div class="circle"></div>
-                        </div><div class="gap-patch">
-                        <div class="circle"></div>
-                        </div><div class="circle-clipper right">
-                        <div class="circle"></div>
-                        </div>
-                    </div>
-                </div> -->
             </div>   
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
     <script src="../public/materialize/js/materialize.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="../public/js/llenarPersonasNoAsignadas.js"></script>
+    <script>
+        $('#example').DataTable({
+                // pageLength: 10,
+                scrollY: 400,
+                ordering: true,
+                select: true,
+                responsive: true
+                // lengthMenu: [ 10, 25, 50, 75, 100 ]
+
+            });
+    </script>
 </body>
 </html>
