@@ -167,6 +167,7 @@ router.post('/agregar', async function (req, res, next) {
                                                 if (resP.rows[0]) {
                                                     const persona = resP.rows[0]
                                                     await pool.query('insert into voluntarios (registro,idtipo,idpersona) values($1,$2,$3) returning *', [body.registro, body.voluntario, persona.idpersona])
+                                                    await pool.query('insert into cuentas (usuario,pass,idpersona,rol) values($1,$2,$3,$4) returning *', [body.registro, body.ci, persona.idpersona, body.rol])
                                                     req.flash('agregarPersona', 'Registro Exitoso!')
                                                     res.redirect('/home/1');
                                                 }
@@ -186,7 +187,7 @@ router.post('/agregar', async function (req, res, next) {
                             res.redirect('/home/1');
                         } else {
                             await pool.query('insert into personas (nombres,apat,amat,email,telf,ci,estado) values($1,$2,$3,$4,$5,$6,$7) RETURNING *',
-                                [body.nombre, body.apat, body.amat, body.nombre + 'gmail.com', body.telf, body.telf, 'T'], async (err, resP) => {
+                                [body.nombre, body.apat, body.amat, body.nombre + '@gmail.com', body.telf, body.telf, 'T'], async (err, resP) => {
                                     if (resP.rows[0]) {
                                         const persona = resP.rows[0]
                                         await pool.query('insert into adultos (idpersona) values($1) returning *', [persona.idpersona])
