@@ -102,6 +102,9 @@ router.get('/home/:menu', async function (req, res, next) {
         case '4':
             render(menu)
             break;
+        case '5':
+            render(menu)
+            break;
         default:
     }
 
@@ -237,11 +240,35 @@ router.get('/api/getPersonasNoAsignadas/:rol', async (req, res, next) => {
     // console.log(json)
     res.json(all.rows)
 })
+router.get('/api/getAdultosNoAsignados/:idlab/:idhorario', async (req, res, next) => {
+    var idlab = req.params.idlab
+    var idhorario = req.params.idhorario
+    let all = await pool.query(`select pe.idpersona,adu.idadulto,pe.nombres,pe.apat,pe.amat,pe.ci,asig.idlab from personas pe inner join adultos adu on(pe.idpersona = adu.idpersona) inner join asignacion asig on(pe.idpersona = asig.idpersona) where asig.idlab = ${idlab} and asig.idhorario=${idhorario} and adu.idadulto not in(select idadulto from asignacionadulto)`)
+    // console.log(json)
+    res.json(all.rows)
+})
+
+router.get('/api/getVolNoAsignados/:idlab/:idhorario', async (req, res, next) => {
+    var idlab = req.params.idlab
+    var idhorario = req.params.idhorario
+    let all = await pool.query(`select pe.idpersona,vol.registro,pe.nombres,pe.apat,pe.amat,pe.ci,asig.idlab from personas pe inner join voluntarios vol on(pe.idpersona = vol.idpersona) inner join asignacion asig on(pe.idpersona = asig.idpersona) where asig.idlab = ${idlab} and asig.idhorario=${idhorario} and vol.registro not in(select registro from asignacionadulto)`)
+    // console.log(json)
+    res.json(all.rows)
+})
 router.post('/api/asignarLab', async (req, res, next) => {
     // var id = req.params.id
     var body = req.body
     console.log(body)
     let all = await pool.query(`insert into asignacion(fec_ini,fec_fin,idlab,idpersona,idhorario)values('${body.fec_ini}','${body.fec_fin}',${body.idlab},${body.idpersona},${body.idhorario})`)
+    // console.log(json)
+    res.json(all.rows)
+    // res.redirect('/home/3')
+})
+router.post('/api/asignarAdulto', async (req, res, next) => {
+    // var id = req.params.id
+    var body = req.body
+    console.log(body)
+    let all = await pool.query(`insert into asignacionadulto(registro,idadulto)values('${body.registro}',${body.idadulto})`)
     // console.log(json)
     res.json(all.rows)
     // res.redirect('/home/3')

@@ -3,53 +3,59 @@
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-.mainAsignar{
+.mainAsignarVol{
     background:#fff url('../img/bg02.png');
-    /* width: 100vw; */
-    /* min-height: 100vh; */
     padding:20px 0;
-    overflow-x: hidden;
 }
-.mainAsignar .container h2{
+.mainAsignarVol .container h2{
     margin: 0;
 }
-.mainAsignar .container .containerSelect{
+.mainAsignarVol .container .containerSelect{
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
 }
-.mainAsignar .container .containerSelect .input-field{
+.mainAsignarVol .container .containerSelect .input-field{
     width: 80%;
 }
-.mainAsignar .container .containerFechas{
+.mainAsignarVol .container .containerFechas{
     margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(2,1fr);
     column-gap: 20px;
     
 }
-.mainAsignar .container .row form .input-field figure{
+.mainAsignarVol .container .row form .input-field figure{
     text-align: center;
 }
-.mainAsignar .container .row form .input-field figure img{
+.mainAsignarVol .container .row form .input-field figure img{
     width: 40%;
     border-radius: 50%;
 }
-.mainAsignar .container .dataTables_wrapper.no-footer .dataTables_length select{
+.mainAsignarVol .container .dataTables_wrapper.no-footer .dataTables_length select{
     display: block;
 }
 
-.mainAsignar .container table .containerPersonas tr td select{
-    display: block;
+.mainAsignarVol .container .containerPersonas .personas{
+    display: grid;
+    grid-template-columns: 10% 25% 22.5% 22.5% 20% ;
+    column-gap: 5px;
+    
 }
 
 table.dataTable.row-border tbody tr:first-child th, table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th, table.dataTable.display tbody tr td:first-child{
-    width: 50px !important;
+    width: 60px !important;
     padding: 5px;
 }
 table.dataTable.row-border tbody tr:first-child th, table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th, table.dataTable.display tbody tr td:first-child img{
     width: 100%;
     border-radius: 10px;
+}
+table.dataTable.row-border tbody tr:first-child th, table.dataTable.row-border tbody tr:first-child td, table.dataTable.display tbody tr:first-child th, table.dataTable.display tbody tr td{
+    text-align: center;
+}
+th{
+    text-align: center;
 }
 
 h3{

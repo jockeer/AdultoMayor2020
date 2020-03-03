@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../public/img/logouteC.png"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../public/materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="../public/css/asignarVol.css">
+    <title>Adulto Mayor | AsignarLab</title>
+</head>
+<body>   
+    <main class="mainAsignarVol">
+        <div class="container">
+            <h2>Asignacion de Voluntarios</h2>
+            <hr>
+            <div class="containerSelect">
+                <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <select id="selectLab">
+                      <option value="" disabled selected>Laboratorio</option>
+                      <option value="1">N-221</option>
+                      <option value="2">N-401</option>
+                      <option value="3">N-402</option>
+                      <option value="4">N-503</option>
+                    </select>
+                    <label>Seleccione el Laboratorio</label>
+                </div>
+                <div class="input-field">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <select id="selectHorario">
+                      <option value="" disabled selected>Horario</option>
+                      <option value="1">9:00 - 11:30</option>
+                      <option value="2">14:30 - 17:00</option>
+
+                    </select>
+                    <label>Seleccione el Horario</label>
+                </div>
+                
+            </div>
+            <a id="btnBuscarAdul" class="btn"><i class="material-icons left">youtube_searched_for</i>Buscar</a>
+
+             <hr>
+
+             <table id="example" class="display nowrap dataTable dtr-inline collapsed dataTables_info" role="grid" aria-describedby>
+              <thead>
+                  <tr>
+                      <th>Foto</th>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Acciones</th>
+                      <!-- <th data-class-name="priority">Column 4</th> -->
+                  </tr>
+              </thead>
+              <tbody class="containerPersonas" id="containerPersonas">
+                                   
+              </tbody>
+          </table>
+               
+        </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet">
+    <div class="modal-content">
+      <ul id="containerVol" class="collection with-header">
+        <li class="collection-header"><h4>Voluntarios para Asignar</h4></li>
+        <li class="collection-item avatar">
+          <img src="../public/img/dan.jpg" alt="" class="circle">
+          <div>Alvin<a href="#!" class="btn secondary-content"><i class="material-icons">send</i></a></div>
+          
+        </li>
+        <li class="collection-item avatar">
+          <i class="material-icons circle">folder</i>
+          <span class="title">Title</span>
+          <p>First Line <br>
+             Second Line
+          </p>
+          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+        <li class="collection-item avatar">
+          <i class="material-icons circle green">insert_chart</i>
+          <span class="title">Title</span>
+          <p>First Line <br>
+             Second Line
+          </p>
+          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+        <li class="collection-item avatar">
+          <i class="material-icons circle red">play_arrow</i>
+          <span class="title">Title</span>
+          <p>First Line <br>
+             Second Line
+          </p>
+          <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+    </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="../public/materialize/js/materialize.min.js"></script>
+    <script src="../public/js/llenarAdultosNoAsig.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.modal');
+        var instances = M.Modal.init(elems);
+      });
+      $('#example').DataTable({
+                // pageLength: 10,
+                scrollY: 400,
+                ordering: true,
+                select: true,
+                responsive: true
+                // lengthMenu: [ 10, 25, 50, 75, 100 ]
+
+            });
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+
+    </script>
+</body>
+</html>
