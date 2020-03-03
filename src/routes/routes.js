@@ -117,7 +117,7 @@ router.get('/home/:menu', async function (req, res, next) {
                 user: datos,
                 file: `../photos/${datos.nombres} ${datos.apat} ${datos.amat}-${datos.ci}.jpg`
             });
-            // console.log('home', req.user, datos)
+            console.log('home', req.user, datos)
         } else {
             res.redirect('/login');
         }
@@ -153,7 +153,7 @@ router.post('/agregar', async function (req, res, next) {
         } else {
             const body = req.body
             const file = req.file
-            if (body.nombre == '' || body.apat == '' || body.amat == '' || body.email == '' || body.telf == '' || body.ci == '' || body.tipo == undefined) {
+            if (body.nombre == '' || body.apat == '' || body.amat == '' || body.telf == '' || body.tipo == undefined) {
                 console.log('1:', body)
                 console.log('2:', req.file)
                 req.flash('agregarPersona', 'Error: Todos los campos son necesarios.1')
@@ -192,13 +192,13 @@ router.post('/agregar', async function (req, res, next) {
                 if (body.tipo == 'Adulto') {
                     console.log('1:', body)
                     console.log('2:', req.file)
-                    await pool.query('SELECT * FROM personas WHERE ci=$1', [body.ci], async function (err, result) {
+                    await pool.query('SELECT * FROM personas WHERE telf=$1', [body.telf], async function (err, result) {
                         if (result.rows[0]) {
                             req.flash('agregarPersona', 'Este usuario ya existe!')
                             res.redirect('/home/1');
                         } else {
                             await pool.query('insert into personas (nombres,apat,amat,email,telf,ci,estado) values($1,$2,$3,$4,$5,$6,$7) RETURNING *',
-                                [body.nombre, body.apat, body.amat, body.email, body.telf, body.ci, 'T'], async (err, resP) => {
+                                [body.nombre, body.apat, body.amat, body.nombre + 'gmail.com', body.telf, body.telf, 'T'], async (err, resP) => {
                                     if (resP.rows[0]) {
                                         const persona = resP.rows[0]
                                         await pool.query('insert into adultos (idpersona) values($1) returning *', [persona.idpersona])
