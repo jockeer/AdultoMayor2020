@@ -251,7 +251,7 @@ router.get('/api/getFacilitadores/:idlab/:idhorario', async (req, res, next) => 
 router.get('/api/getVoluntarios/:idlab/:idhorario', async (req, res, next) => {
     var idlab = req.params.idlab
     var idhorario = req.params.idhorario
-    let all = await pool.query(`select pe.nombres,pe.apat,pe.amat,vol.registro,asigvol.idasiga,asigvol.idadulto from personas pe inner join voluntarios vol on(pe.idpersona=vol.idpersona)inner join cuentas cu on(cu.idpersona=pe.idpersona) inner join asignacion asig on(asig.idpersona=pe.idpersona) inner join asignacionadulto asigvol on(vol.registro = asigvol.registro) where cu.rol = 'Voluntario' or cu.rol = 'Adulto' and asig.idlab=3 and asig.idhorario=1`)
+    let all = await pool.query(`select pe.nombres,pe.ci,pe.apat,pe.amat,vol.registro,asigvol.idasiga,asigvol.idadulto from personas pe inner join voluntarios vol on(pe.idpersona=vol.idpersona)inner join cuentas cu on(cu.idpersona=pe.idpersona) inner join asignacion asig on(asig.idpersona=pe.idpersona) inner join asignacionadulto asigvol on(vol.registro = asigvol.registro) where cu.rol = 'Voluntario' or cu.rol = 'Adulto' and asig.idlab=${idlab} and asig.idhorario=${idhorario}`)
     // console.log(json)
     res.json(all.rows)
 })
