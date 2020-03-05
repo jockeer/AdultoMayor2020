@@ -5,6 +5,8 @@ const morgan = require('morgan')
 const passport = require('passport')
 const session = require('express-session')
 const flash = require('connect-flash')
+const SocketIO = require('socket.io')
+
 
 // initializations
 const app = express()
@@ -52,6 +54,16 @@ app.use('/public', express.static(__dirname + '/public'))
 app.use('/photos', express.static(__dirname + '/photos'))
 
 // starting the server
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
     console.log('Server on port', app.get('port'));
+})
+
+// websockets
+const io = SocketIO(server)
+io.on('connection', (socket) => {
+    console.log('new connection', socket.id);
+    socket.on('disconnect', () => {
+        console.log('disconnected');
+
+    })
 })
