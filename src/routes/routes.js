@@ -241,6 +241,22 @@ router.get('/api/getVolNoAsignados/:idlab/:idhorario', async (req, res, next) =>
     // console.log(json)
     res.json(all.rows)
 })
+router.get('/api/getFacilitadores/:idlab/:idhorario', async (req, res, next) => {
+    var idlab = req.params.idlab
+    var idhorario = req.params.idhorario
+    let all = await pool.query(`select pe.nombres,pe.apat,pe.amat,pe.ci,vol.registro,cu.rol,asig.idlab,asig.idhorario from personas pe inner join voluntarios vol on(pe.idpersona=vol.idpersona)inner join cuentas cu on(cu.idpersona=pe.idpersona) inner join asignacion asig on(asig.idpersona=pe.idpersona) where cu.rol = 'Co-Facilitador' or cu.rol = 'Facilitador' and asig.idlab=${idlab} and asig.idhorario=${idhorario}`)
+    // console.log(json)
+    res.json(all.rows)
+})
+router.get('/api/getVoluntarios/:idlab/:idhorario', async (req, res, next) => {
+    var idlab = req.params.idlab
+    var idhorario = req.params.idhorario
+    let all = await pool.query(`select pe.nombres,pe.apat,pe.amat,vol.registro,asigvol.idasiga,asigvol.idadulto from personas pe inner join voluntarios vol on(pe.idpersona=vol.idpersona)inner join cuentas cu on(cu.idpersona=pe.idpersona) inner join asignacion asig on(asig.idpersona=pe.idpersona) inner join asignacionadulto asigvol on(vol.registro = asigvol.registro) where cu.rol = 'Voluntario' or cu.rol = 'Adulto' and asig.idlab=3 and asig.idhorario=1`)
+    // console.log(json)
+    res.json(all.rows)
+})
+
+
 router.post('/api/asignarLab', async (req, res, next) => {
     // var id = req.params.id
     var body = req.body
