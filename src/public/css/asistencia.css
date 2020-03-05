@@ -1,0 +1,125 @@
+*{
+    padding: 0;
+    margin: 0rem;
+}
+.mainAsistencia{
+    background:#fff url('../img/bg02.png');
+    /* width: 100vw; */
+    min-height: 100vh;
+    padding:20px 0;
+    overflow-x: hidden;
+}
+.mainAsistencia .container .containerSelect{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+                        
+.mainAsistencia .container .containerSelect .input-field{
+    width: 50%;
+}
+.mainAsistencia .container .containerFacilitadores{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 15px;
+    /* border-bottom: 1px solid rgba(139, 139, 139, 0.6); */
+    margin-bottom: 20px;
+}
+
+.mainAsistencia .container .containerFacilitadores .card .card-content figure{
+    margin: 0;
+    text-align: center;
+}
+.mainAsistencia .container .containerFacilitadores .card .card-content figure .fotoFacilitador{
+    width: 80%;
+    /* border-radius: 50%; */
+}
+.mainAsistencia .container .containerFacilitadores .card .card-content{
+    color: #474747;
+}
+.mainAsistencia .container .containerFacilitadores .card .card-action{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    row-gap: 15px;
+    column-gap: 5px;
+    /* box-shadow: 0 0 black; */
+    background: #474747 url('../img/bg02.png');
+}
+.mainAsistencia .container .containerFacilitadores .card .card-action a:nth-of-type(1){
+    background: #43a047;
+}
+.mainAsistencia .container .containerFacilitadores .card .card-action a:nth-of-type(2){
+    background: #C9302C;
+}
+.mainAsistencia .container .containerFacilitadores .card .card-action a:nth-of-type(3){
+    background: #26A69A;
+}
+.mainAsistencia .container .containerVoluntarios{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 60px;
+    row-gap: 20px;
+}
+.mainAsistencia .container .containerVoluntarios .card{
+    width: 100%;
+    position: relative;
+    background: #f8f8f8 url('../img/bg02.png');
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content .techoRojo{
+    width: 100%;
+    height: 12px;
+    background: #C9302C url('../img/bg02.png');
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content{
+    background: #f8f8f8 url('../img/bg01.png');
+
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content .fotoVoluntario{
+    width: 40%;
+    border-radius: 50%;
+    
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content span{
+    color: #474747;
+    font-weight: bold;
+    font-size: 1.3em;
+    margin: 0;
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content .fotoAdulto{
+    width: 40%;
+    border-radius: 50%;
+    position: absolute;
+    top: 25%;
+    right: -19%;
+    z-index: 2;
+    
+    
+}
+.mainAsistencia .container .containerVoluntarios .card .card-action{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    row-gap: 15px;
+    column-gap: 5px;
+    /* box-shadow: 0 0 black; */
+    background: #474747 url('../img/bg02.png');
+}
+.mainAsistencia .container .containerVoluntarios .card .card-action a:nth-of-type(1){
+    background: #43a047;
+}
+.mainAsistencia .container .containerVoluntarios .card .card-action a:nth-of-type(2){
+    background: #C9302C;
+}
+.mainAsistencia .container .containerVoluntarios .card .card-action a:nth-of-type(3){
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background: #26A69A;
+}
+
+
