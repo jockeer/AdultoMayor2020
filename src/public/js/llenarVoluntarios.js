@@ -1,3 +1,24 @@
+function Entrada(registro){
+    let $prog=document.getElementById(`content${registro}`)
+    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
+    let $botonsalida = document.getElementById(`btnSalida${registro}`)
+    // RegistraringresoSalida(codasig);
+    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
+    $prog.classList.add('asis');
+    $botoningreso.disabled=true;
+    $botonsalida.disabled=false;
+}
+function Salida(registro){
+    let $prog=document.getElementById(`content${registro}`)
+    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
+    let $botonsalida = document.getElementById(`btnSalida${registro}`)
+    // RegistraringresoSalida(codasig);
+    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
+    $prog.classList.remove('asis');
+    // $botoningreso.disabled=false;
+    $botonsalida.disabled=true;
+}
+
 async function cargarVoluntarios(idlab,idhorario){
     async function getVoluntarios(url) {
         const response = await fetch(url);
@@ -7,8 +28,8 @@ async function cargarVoluntarios(idlab,idhorario){
     const $listaVoluntarios= await getVoluntarios(`http://localhost:3000/api/getVoluntarios/${idlab}/${idhorario}`);
     // debugger
     function voluntarioItemTemplate(persona){
-        return `<div class="card ">
-                    <div class="card-content">
+        return `<div class="card">
+                    <div id="content${persona.registro}" class="card-content">
                     <div class="techoRojo"></div>
                         <img class="fotoVoluntario" src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt="">
                     <span class="card-title">${persona.nombres}</span>
@@ -18,9 +39,9 @@ async function cargarVoluntarios(idlab,idhorario){
                     <p></p>
                     </div>
                     <div class="card-action">
-                    <a class="waves-effect waves-light btn">Entrada</a>
-                    <a class="waves-effect waves-light btn">Salida</a>
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Detalles</a>
+                    <button class="btn" id="btnIngreso${persona.registro}" onclick="Entrada(${persona.registro});">Entrada</button>
+                    <button class="btn" id="btnSalida${persona.registro}" onclick="Salida(${persona.registro});">Salida</button>
+                    <button class="btn modal-trigger" href="#modal1">Detalles</button>
                     </div>
                 </div>`;
     }

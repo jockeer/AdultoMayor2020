@@ -17,9 +17,9 @@ async function cargarFacilitadores(idlab,idhorario){
                     
                     </div>
                     <div class="card-action">
-                    <a class="waves-effect waves-light btn">Entrada</a>
-                    <a class="waves-effect waves-light btn">Salida</a>
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Detalles</a>
+                    <a class="btn">Entrada</a>
+                    <a class="btn">Salida</a>
+                    <a class="btn modal-trigger" href="#modal1">Detalles</a>
                     </div>
                 </div>`;
     }
