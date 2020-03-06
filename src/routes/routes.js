@@ -188,9 +188,11 @@ router.post('/agregar', async function (req, res, next) {
                         } else {
                             await pool.query('insert into personas (nombres,apat,amat,email,telf,ci,estado) values($1,$2,$3,$4,$5,$6,$7) RETURNING *',
                                 [body.nombre, body.apat, body.amat, body.nombre + '@gmail.com', body.telf, body.telf, 'T'], async (err, resP) => {
+                                    
                                     if (resP.rows[0]) {
                                         const persona = resP.rows[0]
-                                        await pool.query('insert into adultos (idpersona) values($1) returning *', [persona.idpersona])
+                                        let foto= `${body.nombre} ${body.apat} ${body.amat}-${body.telf}`
+                                        await pool.query('insert into adultos (idpersona,foto) values($1,$2) returning *', [persona.idpersona, foto])
                                         req.flash('agregarPersona', 'Registro Exitoso!')
                                         res.redirect('/home/1');
                                     }
@@ -251,7 +253,11 @@ router.get('/api/getFacilitadores/:idlab/:idhorario', async (req, res, next) => 
 router.get('/api/getVoluntarios/:idlab/:idhorario', async (req, res, next) => {
     var idlab = req.params.idlab
     var idhorario = req.params.idhorario
-    let all = await pool.query(`select pe.nombres,pe.ci,pe.apat,pe.amat,vol.registro,asigvol.idasiga,asigvol.idadulto from personas pe inner join voluntarios vol on(pe.idpersona=vol.idpersona)inner join cuentas cu on(cu.idpersona=pe.idpersona) inner join asignacion asig on(asig.idpersona=pe.idpersona) inner join asignacionadulto asigvol on(vol.registro = asigvol.registro) where cu.rol = 'Voluntario' or cu.rol = 'Adulto' and asig.idlab=${idlab} and asig.idhorario=${idhorario}`)
+    let all = await pool.query(`select pe.nombres, pe.apat,pe.amat,pe.ci,asig.idlab,asig.idhorario,vol.registro,adultos.foto,adultos.idadulto
+    from adultos,personas pe join asignacion asig on(pe.idpersona=asig.idpersona)
+         join cuentas cu on(pe.idpersona=cu.idpersona)
+         join voluntarios vol on(vol.idpersona=pe.idpersona)	 
+    where asig.idlab=${idlab} and asig.idhorario=${idhorario} and cu.rol='Voluntario'`)
     // console.log(json)
     res.json(all.rows)
 })

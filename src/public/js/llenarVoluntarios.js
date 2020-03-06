@@ -14,7 +14,7 @@ async function cargarVoluntarios(idlab,idhorario){
                     <span class="card-title">${persona.nombres}</span>
                     <span class="card-title">${persona.apat} ${persona.amat}</span>
                     <p></p>
-                    <img class="fotoAdulto" src="../public/img/parker.jpg" alt="">
+                    <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
                     <p></p>
                     </div>
                     <div class="card-action">
