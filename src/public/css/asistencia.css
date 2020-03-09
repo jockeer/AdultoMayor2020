@@ -98,15 +98,31 @@
     font-size: 1.3em;
     margin: 0;
 }
-.mainAsistencia .container .containerVoluntarios .card .card-content .fotoAdulto{
-    width: 40%;
-    border-radius: 50%;
+.mainAsistencia .container .containerVoluntarios .card .card-content .containerfotoAdulto{
     position: absolute;
-    top: 25%;
-    right: -19%;
-    z-index: 2;
-    
-    
+    top: 17%;
+    right: -15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+    height: 30%;
+
+}
+
+.mainAsistencia .container .containerVoluntarios .card .card-content .btn{
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainAsistencia .container .containerVoluntarios .card .card-content .containerfotoAdulto a .fotoAdulto{
+    width: 100%;
+    border-radius: 50%;
 }
 .mainAsistencia .container .containerVoluntarios .card .card-action{
     padding: 10px;

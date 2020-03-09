@@ -1,3 +1,4 @@
+let $idadulto=0;
 function Registraringreso(registro){
     let d=new Date().getTime();
     let hour = new Date(d)
@@ -74,7 +75,32 @@ function Salida(registro){
     $botonsalida.disabled=true;
 }
 
+async function verAdulto(idadulto){
+    $idadulto=idadulto
 
+    async function getAsistencia(url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    }
+    let d=new Date().getTime();
+    let hour = new Date(d)
+    
+    var t = new Date;
+    let fecha = `${t.getFullYear()}-${t.getMonth()+1}-${t.getDate()}`
+
+    let urlA = await getAsistencia(`http://localhost:3000/api/obtenerAsisMarcadadeAdulto/${fecha}/${$idadulto}`)
+
+    if(urlA[0] != null){
+        document.getElementById('btnMarcarAsisAdu').disabled=true;
+        document.getElementById('btnMarcarAsisAdu').textContent='Asistencia marcada';
+        
+    }else{
+        
+        document.getElementById('btnMarcarAsisAdu').disabled=false;
+        document.getElementById('btnMarcarAsisAdu').textContent='Marcar Asistencia';
+    }
+}
 
 async function cargarVoluntarios(idlab,idhorario){
     async function getVoluntarios(url) {
@@ -83,7 +109,7 @@ async function cargarVoluntarios(idlab,idhorario){
         return data;
     }
     const $listaVoluntarios= await getVoluntarios(`http://localhost:3000/api/getVoluntarios/${idlab}/${idhorario}`);
-    // debugger
+    debugger
     function voluntarioItemTemplate(persona){
         return `<div class="card">
                     <div id="content${persona.registro}" class="card-content">
@@ -92,7 +118,11 @@ async function cargarVoluntarios(idlab,idhorario){
                     <span class="card-title">${persona.nombres}</span>
                     <span class="card-title">${persona.apat} ${persona.amat}</span>
                     <p></p>
-                    <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
+                    <div class="containerfotoAdulto">
+                        <a href="#modalAdulto" class="btn modal-trigger" onclick="verAdulto(${persona.idadulto});">
+                            <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
+                        </a>
+                    </div>
                     <p></p>
                     </div>
                     <div class="card-action">
@@ -156,4 +186,23 @@ async function cargarVoluntarios(idlab,idhorario){
 
 document.getElementById('btnBuscarAsis').addEventListener('click',()=>{
     cargarVoluntarios(document.getElementById('labAsis').value,document.getElementById('horarioAsis').value)
+})
+
+document.getElementById('btnMarcarAsisAdu').addEventListener('click',()=>{
+    const url = 'http://localhost:3000/api/regIngresoAdulto';
+    const data = {};
+    data.fecha=fecha;
+    data.idadulto=$idadulto
+
+    let JSO = JSON.stringify(data)
+    alert(JSO)
+    fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: JSO, // data can be `string` or {object}!
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    }).then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => alert('Asistencia Registrada'));
 })

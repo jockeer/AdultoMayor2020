@@ -268,6 +268,13 @@ router.get('/api/obtenerAsisMarcada/:fecha/:registro', async (req, res, next) =>
     // console.log(json)
     res.json(all.rows)
 })
+router.get('/api/obtenerAsisMarcadadeAdulto/:fecha/:idadulto', async (req, res, next) => {
+    var fecha = req.params.fecha
+    var idadulto = req.params.idadulto
+    let all = await pool.query(`select * from asistenciaadultos where fecha='${fecha}' and idadulto=${idadulto}`)
+    // console.log(json)
+    res.json(all.rows)
+})
 
 
 
@@ -294,6 +301,15 @@ router.post('/api/regIngresoVol', async (req, res, next) => {
     var body = req.body
     console.log(body)
     let all = await pool.query(`insert into asistencia_voluntario(fecha,hora_ing,hora_salida,registro)values('${body.fecha}','${body.hora_ing}','${body.hora_salida}','${body.registro}')`)
+    // console.log(json)
+    res.json(all.rows)
+    // res.redirect('/home/3')
+})
+router.post('/api/regIngresoAdulto', async (req, res, next) => {
+    // var id = req.params.id
+    var body = req.body
+    console.log(body)
+    let all = await pool.query(`insert into asistenciaadultos(fecha,idadulto) values('${body.fecha}',${body.idadulto})`)
     // console.log(json)
     res.json(all.rows)
     // res.redirect('/home/3')
