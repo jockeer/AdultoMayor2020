@@ -253,11 +253,18 @@ router.get('/api/getFacilitadores/:idlab/:idhorario', async (req, res, next) => 
 router.get('/api/getVoluntarios/:idlab/:idhorario', async (req, res, next) => {
     var idlab = req.params.idlab
     var idhorario = req.params.idhorario
-    let all = await pool.query(`select pe.nombres, pe.apat,pe.amat,pe.ci,asig.idlab,asig.idhorario,vol.registro,adultos.foto,adultos.idadulto
-    from adultos,personas pe join asignacion asig on(pe.idpersona=asig.idpersona)
-         join cuentas cu on(pe.idpersona=cu.idpersona)
-         join voluntarios vol on(vol.idpersona=pe.idpersona)	 
-    where asig.idlab=${idlab} and asig.idhorario=${idhorario} and cu.rol='Voluntario'`)
+    let all = await pool.query(`select personas.nombres,personas.apat,personas.amat,personas.ci,asignacion.idasig,voluntarios.registro,asignacionadulto.registro,adultos.foto,adultos.idadulto 
+    from personas,asignacion,voluntarios,asignacionadulto,adultos
+    where personas.idpersona=asignacion.idpersona and personas.idpersona = voluntarios.idpersona 
+    and voluntarios.registro=asignacionadulto.registro and adultos.idadulto=asignacionadulto.idadulto 
+    and asignacion.idlab = ${idlab} and asignacion.idhorario=${idhorario}`)
+    // console.log(json)
+    res.json(all.rows)
+})
+router.get('/api/obtenerAsisMarcada/:fecha/:registro', async (req, res, next) => {
+    var fecha = req.params.fecha
+    var registro = req.params.registro
+    let all = await pool.query(`select * from asistencia_voluntario where fecha='${fecha}' and registro='${registro}'`)
     // console.log(json)
     res.json(all.rows)
 })
@@ -281,6 +288,26 @@ router.post('/api/asignarAdulto', async (req, res, next) => {
     res.json(all.rows)
     // res.redirect('/home/3')
 })
+router.post('/api/regIngresoVol', async (req, res, next) => {
+    // var id = req.params.id
+    var body = req.body
+    console.log(body)
+    let all = await pool.query(`insert into asistencia_voluntario(fecha,hora_ing,hora_salida,registro)values('${body.fecha}','${body.hora_ing}','${body.hora_salida}','${body.registro}')`)
+    // console.log(json)
+    res.json(all.rows)
+    // res.redirect('/home/3')
+})
+router.put('/api/regSalidaVol/:fecha/:registro', async (req, res, next) => {
+    var fecha = req.params.fecha
+    var registro = req.params.registro
+    var body = req.body
+    console.log(body)
+    let all = await pool.query(`UPDATE asistencia_voluntario set hora_salida='${body.hora_salida}' where fecha='${fecha}' and registro= '${registro}'`)
+    // console.log(json)
+    res.json(all.rows)
+    // res.redirect('/home/3')
+})
+
 
 
 
