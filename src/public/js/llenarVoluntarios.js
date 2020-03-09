@@ -110,9 +110,9 @@ async function cargarVoluntarios(idlab,idhorario){
         return data;
     }
     const $listaVoluntarios= await getVoluntarios(`http://localhost:3000/api/getVoluntarios/${idlab}/${idhorario}`);
-    debugger
+    // debugger
     function voluntarioItemTemplate(persona){
-        return `<div class="card">
+        return `<div class="card prueba">
                     <div id="content${persona.registro}" class="card-content">
                     <div class="techoRojo"></div>
                         <img class="fotoVoluntario" src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt="">
@@ -149,9 +149,9 @@ async function cargarVoluntarios(idlab,idhorario){
         listvoluntarios.forEach(voluntario => {
             async function validarMarcacion(){
                 const $asis= await getVoluntarios(`http://localhost:3000/api/obtenerAsisMarcada/${fecha}/${voluntario.registro}`);
-                debugger
+                // debugger 
                 if($asis[0] != null){   
-                    debugger                                    
+                    // debugger                                    
                         if($asis[0].hora_salida=='00:00:00'){
                             const HTMLString = voluntarioItemTemplate(voluntario);
                             const voluntarioElement = createTemplate(HTMLString);         

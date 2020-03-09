@@ -62,11 +62,12 @@ const server = app.listen(app.get('port'), () => {
 const io = SocketIO(server)
 io.on('connection', (socket) => {
     console.log('new connection', socket.id);
-    socket.on('fondoVerde', function (msg) {
+
+    socket.on('fondoVerde', (msg)=>{
         io.emit('fondoVerde', msg);
     });
-    // socket.on('disconnect', () => {
-    //     console.log('disconnected');
+    socket.on('disconnect', () => {
+        console.log('disconnected');
 
-    // })
+    })
 })

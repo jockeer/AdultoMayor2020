@@ -52,26 +52,23 @@ function RegistrarSalidaFac(registro){
       .catch(error => console.error('Error:', error))
       .then(response => alert("Salida Actualizado")); 
 }
+let $prog;
+let $botoningreso;
+let $botonsalida;
 
 function EntradaFac(registro){
-    let $prog=document.getElementById(`content${registro}`)
-    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
-    let $botonsalida = document.getElementById(`btnSalida${registro}`)
-    RegistraringresoFac(registro)
-    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
     socket.emit('fondoVerde', 'asis')
-    
-    socket.on('fondoVerde', function (color) {
-        console.log(color)
-        $prog.classList.add(color);
-        $botoningreso.disabled=true;
-        $botonsalida.disabled=false;
-        // document.body.style.backgroundColor = color;
-        // $prog.classList.add('asis');
-        // $('#test').css("background-color", color)
-        // console.log(color)
-    })
+    $prog=document.getElementById(`content${registro}`)
+    $botoningreso = document.getElementById(`btnIngreso${registro}`)
+    $botonsalida = document.getElementById(`btnSalida${registro}`)
+    RegistraringresoFac(registro)
+    $prog.classList.add('asis');
+    $botoningreso.disabled=true;
+    $botonsalida.disabled=false;
+
 }
+
+
 function SalidaFac(registro){
     let $prog=document.getElementById(`content${registro}`)
     let $botoningreso = document.getElementById(`btnIngreso${registro}`)
