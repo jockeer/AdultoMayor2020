@@ -270,6 +270,7 @@ router.get('/api/obtenerAsisMarcada/:fecha/:registro', async (req, res, next) =>
 })
 
 
+
 router.post('/api/asignarLab', async (req, res, next) => {
     // var id = req.params.id
     var body = req.body

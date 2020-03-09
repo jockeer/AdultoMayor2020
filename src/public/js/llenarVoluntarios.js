@@ -102,42 +102,6 @@ async function cargarVoluntarios(idlab,idhorario){
                     </div>
                 </div>`;
     }
-    function voluntarioItemTemplateB(persona){
-        return `<div class="card">
-                    <div id="content${persona.registro}" class="card-content asis">
-                    <div class="techoRojo"></div>
-                        <img class="fotoVoluntario" src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt="">
-                    <span class="card-title">${persona.nombres}</span>
-                    <span class="card-title">${persona.apat} ${persona.amat}</span>
-                    <p></p>
-                    <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
-                    <p></p>
-                    </div>
-                    <div class="card-action">
-                    <button class="btn" id="btnIngreso${persona.registro}" disabled onclick="Entrada(${persona.registro});">Entrada</button>
-                    <button class="btn" id="btnSalida${persona.registro}" onclick="Salida(${persona.registro});">Salida</button>
-                    <button class="btn modal-trigger" href="#modal1">Detalles</button>
-                    </div>
-                </div>`;
-    }
-    function voluntarioItemTemplateC(persona){
-        return `<div class="card">
-                    <div id="content${persona.registro}" class="card-content">
-                    <div class="techoRojo"></div>
-                        <img class="fotoVoluntario" src="http://localhost:3000/photos/${persona.nombres} ${persona.apat} ${persona.amat}-${persona.ci}.jpg" alt="">
-                    <span class="card-title">${persona.nombres}</span>
-                    <span class="card-title">${persona.apat} ${persona.amat}</span>
-                    <p></p>
-                    <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
-                    <p></p>
-                    </div>
-                    <div class="card-action">
-                    <button class="btn" id="btnIngreso${persona.registro}" disabled onclick="Entrada(${persona.registro});">Entrada</button>
-                    <button class="btn" id="btnSalida${persona.registro}" disabled onclick="Salida(${persona.registro});">Salida</button>
-                    <button class="btn modal-trigger" href="#modal1">Detalles</button>
-                    </div>
-                </div>`;
-    }
     function createTemplate(HTMLString){
         const $html = document.implementation.createHTMLDocument();
         $html.body.innerHTML = HTMLString;
@@ -158,14 +122,20 @@ async function cargarVoluntarios(idlab,idhorario){
                 if($asis[0] != null){   
                     debugger                                    
                         if($asis[0].hora_salida=='00:00:00'){
-                            const HTMLString = voluntarioItemTemplateB(voluntario);
+                            const HTMLString = voluntarioItemTemplate(voluntario);
                             const voluntarioElement = createTemplate(HTMLString);         
                             $container.append(voluntarioElement);
+                            document.getElementById(`content${voluntario.registro}`).classList.add('asis');
+                            document.getElementById(`btnIngreso${voluntario.registro}`).disabled=true
+                            document.getElementById(`btnSalida${voluntario.registro}`).disabled=false
                             
                         }else{
-                            const HTMLString = voluntarioItemTemplateC(voluntario);
+                            const HTMLString = voluntarioItemTemplate(voluntario);
                             const voluntarioElement = createTemplate(HTMLString);         
                             $container.append(voluntarioElement);
+                            document.getElementById(`content${voluntario.registro}`).classList.remove('asis');
+                            document.getElementById(`btnIngreso${voluntario.registro}`).disabled=true
+                            document.getElementById(`btnSalida${voluntario.registro}`).disabled=true
                             
                         }              
                 }else{
