@@ -63,6 +63,7 @@ function Entrada(registro){
     $prog.classList.add('asis');
     $botoningreso.disabled=true;
     $botonsalida.disabled=false;
+    
 }
 function Salida(registro){
     let $prog=document.getElementById(`content${registro}`)

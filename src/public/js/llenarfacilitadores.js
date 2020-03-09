@@ -59,9 +59,18 @@ function EntradaFac(registro){
     let $botonsalida = document.getElementById(`btnSalida${registro}`)
     RegistraringresoFac(registro)
     // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
-    $prog.classList.add('asis');
-    $botoningreso.disabled=true;
-    $botonsalida.disabled=false;
+    socket.emit('fondoVerde', 'asis')
+    
+    socket.on('fondoVerde', function (color) {
+        console.log(color)
+        $prog.classList.add(color);
+        $botoningreso.disabled=true;
+        $botonsalida.disabled=false;
+        // document.body.style.backgroundColor = color;
+        // $prog.classList.add('asis');
+        // $('#test').css("background-color", color)
+        // console.log(color)
+    })
 }
 function SalidaFac(registro){
     let $prog=document.getElementById(`content${registro}`)
@@ -72,6 +81,8 @@ function SalidaFac(registro){
     $prog.classList.remove('asis');
     // $botoningreso.disabled=false;
     $botonsalida.disabled=true;
+
+    
 }
 
 async function cargarFacilitadores(idlab,idhorario){
