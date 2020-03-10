@@ -54,26 +54,31 @@ function RegistrarSalida(registro){
       .then(response => alert("Salida Actualizado")); 
 }
 
+socket.on('fondoVerde', (registro)=>{
+    console.log(registro)
+    document.getElementById(`content${registro}`).classList.add('asis')
+    document.getElementById(`btnIngreso${registro}`).disabled=true
+    document.getElementById(`btnSalida${registro}`).disabled=false
+});
+
+socket.on('Normal', (registro)=>{
+    console.log(registro)
+    document.getElementById(`content${registro}`).classList.remove('asis')
+    document.getElementById(`btnSalida${registro}`).disabled=true
+});
+
 function Entrada(registro){
-    let $prog=document.getElementById(`content${registro}`)
-    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
-    let $botonsalida = document.getElementById(`btnSalida${registro}`)
+    socket.emit('fondoVerde', registro);
+
     Registraringreso(registro)
-    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
-    $prog.classList.add('asis');
-    $botoningreso.disabled=true;
-    $botonsalida.disabled=false;
+    alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
+    
     
 }
 function Salida(registro){
-    let $prog=document.getElementById(`content${registro}`)
-    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
-    let $botonsalida = document.getElementById(`btnSalida${registro}`)
+    socket.emit('Normal', registro);
     RegistrarSalida(registro);
-    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
-    $prog.classList.remove('asis');
-    // $botoningreso.disabled=false;
-    $botonsalida.disabled=true;
+    alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
 }
 
 async function verAdulto(idadulto){
@@ -95,11 +100,13 @@ async function verAdulto(idadulto){
     if(urlA[0] != null){
         document.getElementById('btnMarcarAsisAdu').disabled=true;
         document.getElementById('btnMarcarAsisAdu').textContent='Asistencia marcada';
+        document.getElementById(`adulto${$idadulto}`).classList.add('asis')
         
     }else{
         
         document.getElementById('btnMarcarAsisAdu').disabled=false;
         document.getElementById('btnMarcarAsisAdu').textContent='Marcar Asistencia';
+        document.getElementById(`adulto${$idadulto}`).classList.remove('asis')
     }
 }
 
@@ -121,14 +128,14 @@ async function cargarVoluntarios(idlab,idhorario){
                     <p></p>
                     <div class="containerfotoAdulto">
                         <a href="#modalAdulto" class="btn modal-trigger" onclick="verAdulto(${persona.idadulto});">
-                            <img class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
+                            <img id="adulto${persona.idadulto}" class="fotoAdulto" src="http://localhost:3000/photos/${persona.foto}.jpg" alt="">
                         </a>
                     </div>
                     <p></p>
                     </div>
                     <div class="card-action">
                     <button class="btn" id="btnIngreso${persona.registro}" onclick="Entrada(${persona.registro});">Entrada</button>
-                    <button class="btn" id="btnSalida${persona.registro}" onclick="Salida(${persona.registro});">Salida</button>
+                    <button class="btn" id="btnSalida${persona.registro}" disabled onclick="Salida(${persona.registro});">Salida</button>
                     <button class="btn modal-trigger" href="#modal1">Detalles</button>
                     </div>
                 </div>`;
@@ -149,9 +156,10 @@ async function cargarVoluntarios(idlab,idhorario){
         listvoluntarios.forEach(voluntario => {
             async function validarMarcacion(){
                 const $asis= await getVoluntarios(`http://localhost:3000/api/obtenerAsisMarcada/${fecha}/${voluntario.registro}`);
-                // debugger 
+                const $asisAdulto= await getVoluntarios(`http://localhost:3000/api/obtenerAsisMarcadadeAdulto/${fecha}/${voluntario.idadulto}`);
+                console.log($asisAdulto)
                 if($asis[0] != null){   
-                    // debugger                                    
+                                  
                         if($asis[0].hora_salida=='00:00:00'){
                             const HTMLString = voluntarioItemTemplate(voluntario);
                             const voluntarioElement = createTemplate(HTMLString);         
@@ -159,6 +167,10 @@ async function cargarVoluntarios(idlab,idhorario){
                             document.getElementById(`content${voluntario.registro}`).classList.add('asis');
                             document.getElementById(`btnIngreso${voluntario.registro}`).disabled=true
                             document.getElementById(`btnSalida${voluntario.registro}`).disabled=false
+                            if($asisAdulto[0] != null){
+
+                                document.getElementById(`adulto${voluntario.idadulto}`).classList.add('asis')
+                            }
                             
                         }else{
                             const HTMLString = voluntarioItemTemplate(voluntario);
@@ -167,14 +179,22 @@ async function cargarVoluntarios(idlab,idhorario){
                             document.getElementById(`content${voluntario.registro}`).classList.remove('asis');
                             document.getElementById(`btnIngreso${voluntario.registro}`).disabled=true
                             document.getElementById(`btnSalida${voluntario.registro}`).disabled=true
+                            if($asisAdulto[0] != null){
+
+                                document.getElementById(`adulto${voluntario.idadulto}`).classList.add('asis')
+                            }
                             
                         }              
-                }else{
+                    }else{
                         
                         const HTMLString = voluntarioItemTemplate(voluntario);
                         const voluntarioElement = createTemplate(HTMLString);         
                         $container.append(voluntarioElement);
-                }
+                        if($asisAdulto[0] != null){
+
+                            document.getElementById(`adulto${voluntario.idadulto}`).classList.add('asis')
+                        }
+                    }
             }
             validarMarcacion()
             
@@ -190,6 +210,8 @@ document.getElementById('btnBuscarAsis').addEventListener('click',()=>{
 })
 
 document.getElementById('btnMarcarAsisAdu').addEventListener('click',()=>{
+    var t = new Date;
+    let fecha = `${t.getFullYear()}-${t.getMonth()+1}-${t.getDate()}`
     const url = 'http://localhost:3000/api/regIngresoAdulto';
     const data = {};
     data.fecha=fecha;
@@ -205,5 +227,5 @@ document.getElementById('btnMarcarAsisAdu').addEventListener('click',()=>{
         }
     }).then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => alert('Asistencia Registrada'));
+    .then(response => verAdulto($idadulto));
 })

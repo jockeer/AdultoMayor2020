@@ -66,6 +66,9 @@ io.on('connection', (socket) => {
     socket.on('fondoVerde', (msg)=>{
         io.emit('fondoVerde', msg);
     });
+    socket.on('Normal', (msg)=>{
+        io.emit('Normal', msg);
+    });
     socket.on('disconnect', () => {
         console.log('disconnected');
 

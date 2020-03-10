@@ -52,12 +52,10 @@ function RegistrarSalidaFac(registro){
       .catch(error => console.error('Error:', error))
       .then(response => alert("Salida Actualizado")); 
 }
-let $prog;
-let $botoningreso;
-let $botonsalida;
+
 
 function EntradaFac(registro){
-    socket.emit('fondoVerde', 'asis')
+    // socket.emit('fondoVerde', 'asis')
     $prog=document.getElementById(`content${registro}`)
     $botoningreso = document.getElementById(`btnIngreso${registro}`)
     $botonsalida = document.getElementById(`btnSalida${registro}`)
