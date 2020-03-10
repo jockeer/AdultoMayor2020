@@ -53,29 +53,37 @@ function RegistrarSalidaFac(registro){
       .then(response => alert("Salida Actualizado")); 
 }
 
+socket.on('fondoVerdeFac', (registro)=>{
+    console.log(registro)
+    document.getElementById(`content${registro}`).classList.add('asis')
+    document.getElementById(`btnIngreso${registro}`).disabled=true
+    document.getElementById(`btnSalida${registro}`).disabled=false
+});
+
+socket.on('NormalFac', (registro)=>{
+    console.log(registro)
+    document.getElementById(`content${registro}`).classList.remove('asis')
+    document.getElementById(`btnSalida${registro}`).disabled=true
+});
+
 
 function EntradaFac(registro){
-    // socket.emit('fondoVerde', 'asis')
-    $prog=document.getElementById(`content${registro}`)
-    $botoningreso = document.getElementById(`btnIngreso${registro}`)
-    $botonsalida = document.getElementById(`btnSalida${registro}`)
+    socket.emit('fondoVerdeFac', registro)
+    
     RegistraringresoFac(registro)
-    $prog.classList.add('asis');
-    $botoningreso.disabled=true;
-    $botonsalida.disabled=false;
-
+    
+    
 }
 
 
 function SalidaFac(registro){
-    let $prog=document.getElementById(`content${registro}`)
-    let $botoningreso = document.getElementById(`btnIngreso${registro}`)
-    let $botonsalida = document.getElementById(`btnSalida${registro}`)
+    socket.emit('NormalFac', registro)
+
     RegistrarSalidaFac(registro);
     // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
-    $prog.classList.remove('asis');
+
     // $botoningreso.disabled=false;
-    $botonsalida.disabled=true;
+
 
     
 }

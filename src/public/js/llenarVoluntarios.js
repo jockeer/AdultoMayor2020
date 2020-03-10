@@ -71,14 +71,14 @@ function Entrada(registro){
     socket.emit('fondoVerde', registro);
 
     Registraringreso(registro)
-    alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
+    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
     
     
 }
 function Salida(registro){
     socket.emit('Normal', registro);
     RegistrarSalida(registro);
-    alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
+    // alertify.success(`Asistencia Marcada asignacion numero ${codasig}`);
 }
 
 async function verAdulto(idadulto){
